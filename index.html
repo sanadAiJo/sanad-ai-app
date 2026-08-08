@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanad AI - صانع الإعلانات الذكي</title>
+    <title>Sanad AI - صانع إعلانات المطاعم الاحترافي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -15,14 +15,14 @@
     <header class="border-b border-slate-800 p-4 sticky top-0 bg-slate-900/90 backdrop-blur z-50">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Sanad AI 🚀</h1>
-            <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30">الإصدار المتقدم Pro</span>
+            <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30">إصدار الأعمال Pro</span>
         </div>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
         <div class="bg-gradient-to-br from-indigo-900/50 to-slate-800 border border-indigo-500/30 rounded-2xl p-4 text-center">
             <h2 class="text-lg font-bold text-indigo-200 mb-1">صانع حملات المطاعم الذكي</h2>
-            <p class="text-xs text-slate-400">ولّد إعلانات وصور دقيقة لعروض مطعمك بضغطة زر.</p>
+            <p class="text-xs text-slate-400">حَوّل صورة وجبتك الحقيقية إلى حملة إعلانية وصوتية كاملة.</p>
         </div>
 
         <form id="adForm" class="space-y-4">
@@ -33,14 +33,10 @@
 
             <div class="grid grid-cols-2 gap-2">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">نوع الوجبة للصور</label>
-                    <select id="foodCategory" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
-                        <option value="shawarma platter meal with french fries and garlic sauce">🌯 شاورما (Shawarma)</option>
-                        <option value="delicious cheesy pizza">🍕 بيتزا (Pizza)</option>
-                        <option value="juicy beef burger with fries">🍔 برغر (Burger)</option>
-                        <option value="crispy fried chicken family bucket">🍗 دجاج مقلي / بروستد</option>
-                        <option value="oriental grilled meat platter kabab">🍢 مشويات / كباب</option>
-                        <option value="coffee and delicious cake dessert">☕ قهوة وحلويات</option>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">مصدر صورة الوجبة</label>
+                    <select id="imageMode" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                        <option value="upload">📸 رفع صورة الوجبة الحقيقية</option>
+                        <option value="ai">🤖 توليد بالذكاء الاصطناعي</option>
                     </select>
                 </div>
                 <div>
@@ -53,9 +49,26 @@
                 </div>
             </div>
 
+            <!-- Upload Real Image Field -->
+            <div id="uploadContainer" class="block">
+                <label class="block text-xs font-semibold text-slate-300 mb-1">صورة الوجبة من المطعم</label>
+                <input type="file" id="foodImageInput" accept="image/*" class="w-full text-xs text-slate-400 bg-slate-800 border border-slate-700 rounded-xl p-2.5 file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500">
+            </div>
+
+            <!-- AI Image Select Field -->
+            <div id="aiContainer" class="hidden">
+                <label class="block text-xs font-semibold text-slate-300 mb-1">نوع الوجبة للتوليد</label>
+                <select id="foodCategory" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                    <option value="shawarma platter meal with french fries and garlic sauce">🌯 شاورما (Shawarma)</option>
+                    <option value="delicious cheesy pepperoni pizza">🍕 بيتزا (Pizza)</option>
+                    <option value="juicy beef burger with fries">🍔 برغر (Burger)</option>
+                    <option value="crispy fried chicken family bucket">🍗 دجاج مقلي / بروستد</option>
+                </select>
+            </div>
+
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1">تفاصيل العرض السريعة</label>
-                <textarea id="offerDetails" rows="2" required placeholder="مثال: وجبة شاورما عائلية 32 قطعة بـ $6" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
+                <textarea id="offerDetails" rows="2" required placeholder="مثال: وجبة شاورما عائلية 32 قطعة بـ 6 دنانير" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
             </div>
 
             <div>
@@ -90,7 +103,7 @@
 
         <div id="loadingView" class="hidden text-center py-8 space-y-3">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
-            <p class="text-sm font-semibold text-indigo-300">جاري رسم الوجبة وتجهيز السيناريو بذكاء...</p>
+            <p class="text-sm font-semibold text-indigo-300">جاري تجهيز التصميم والتعليق الصوتي...</p>
         </div>
 
         <div id="resultView" class="hidden space-y-5">
@@ -98,32 +111,49 @@
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
-                        <span>📱</span> معاينة ستوري / إعلان إنستغرام
+                        <span>📱</span> معاينة ستوري الإعلان الحقيقي
                     </h3>
-                    <button id="downloadImgBtn" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg transition font-semibold flex items-center gap-1">
-                        📥 تحميل التصميم
-                    </button>
                 </div>
                 
                 <!-- Mockup Frame -->
                 <div class="relative rounded-2xl overflow-hidden bg-slate-950 border-2 border-slate-700 aspect-[9/16] max-w-[280px] mx-auto shadow-2xl flex flex-col justify-between p-3">
-                    <div id="imageLoader" class="absolute inset-0 flex items-center justify-center text-xs text-slate-400 animate-pulse bg-slate-900">جاري رسم وجبة الطعام الشهية...</div>
-                    <img id="aiImage" src="" alt="AI Visual" class="absolute inset-0 w-full h-full object-cover hidden">
+                    <img id="adImagePreview" src="" alt="Food Preview" class="absolute inset-0 w-full h-full object-cover">
                     
                     <!-- Overlay Story Elements -->
-                    <div class="relative z-10 flex justify-between items-center bg-black/50 backdrop-blur-md p-2 rounded-xl border border-white/10">
+                    <div class="relative z-10 flex justify-between items-center bg-black/60 backdrop-blur-md p-2 rounded-xl border border-white/10">
                         <span class="text-[11px] font-bold text-white flex items-center gap-1">
                             <span class="w-2 h-2 rounded-full bg-green-500 inline-block animate-ping"></span>
                             <span id="mockupBrand">مطعم الوجبة</span>
                         </span>
-                        <span class="text-[9px] bg-indigo-600 text-white px-2 py-0.5 rounded-full font-bold">برعاية Sanad AI</span>
+                        <span class="text-[9px] bg-indigo-600 text-white px-2 py-0.5 rounded-full font-bold">Sanad AI</span>
                     </div>
 
-                    <div class="relative z-10 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3 -mx-3 -mb-3 rounded-b-2xl space-y-1 text-right">
-                        <span id="mockupBadge" class="inline-block bg-amber-500 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-md">عرض خاص 🏷️</span>
-                        <p id="mockupOffer" class="text-xs font-bold text-white leading-tight">وجبة شاورما عائلية</p>
+                    <div class="relative z-10 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-3 -mx-3 -mb-3 rounded-b-2xl space-y-1 text-right">
+                        <span class="inline-block bg-amber-500 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-md">عرض خاص 🏷️</span>
+                        <p id="mockupOffer" class="text-xs font-bold text-white leading-tight">تفاصيل العرض</p>
                         <p class="text-[9px] text-slate-300">اطلب الآن من الفرع أو التوصيل 🛵</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Voiceover Generator Player -->
+            <div class="bg-gradient-to-r from-indigo-900/60 to-slate-800 border border-indigo-500/30 rounded-2xl p-4 space-y-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-indigo-300 flex items-center gap-1.5">
+                        <span>🎙️</span> التعليق الصوتي للإعلان (Voiceover)
+                    </h3>
+                    <span id="voiceBadge" class="text-[10px] bg-indigo-600/40 text-indigo-200 px-2 py-0.5 rounded-full">صوت سند</span>
+                </div>
+                <p class="text-xs text-slate-400">استمع للتعليق الصوتي الإعلاني الجاهز للاستخدام في Reels & TikTok:</p>
+                
+                <div class="flex gap-2 pt-1">
+                    <button id="playVoiceBtn" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold py-2.5 px-4 rounded-xl transition flex justify-center items-center gap-2">
+                        <span>▶️</span>
+                        <span>تشغيل الصوت الإعلاني</span>
+                    </button>
+                    <button id="stopVoiceBtn" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition">
+                        ⏹️ إيقاف
+                    </button>
                 </div>
             </div>
 
@@ -131,10 +161,10 @@
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
-                        <span>🎬</span> سيناريو الفيديو (Reels / TikTok)
+                        <span>🎬</span> سيناريو الفيديو
                     </h3>
                     <button id="copyScriptBtn" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg transition font-semibold">
-                        📋 نسخ السيناريو
+                        📋 نسخ
                     </button>
                 </div>
                 <div id="scriptOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
@@ -144,10 +174,10 @@
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
-                        <span>📝</span> كابشن المنشور والهاشتاغات
+                        <span>📝</span> الكابشن والهاشتاغات
                     </h3>
                     <button id="copyCaptionBtn" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg transition font-semibold">
-                        📋 نسخ الكابشن
+                        📋 نسخ
                     </button>
                 </div>
                 <div id="captionOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
@@ -156,6 +186,22 @@
     </main>
 
     <script>
+        // Toggle Image Source Container
+        const imageModeSelect = document.getElementById('imageMode');
+        const uploadContainer = document.getElementById('uploadContainer');
+        const aiContainer = document.getElementById('aiContainer');
+
+        imageModeSelect.addEventListener('change', (e) => {
+            if(e.target.value === 'upload') {
+                uploadContainer.classList.remove('hidden');
+                aiContainer.classList.add('hidden');
+            } else {
+                uploadContainer.classList.add('hidden');
+                aiContainer.classList.remove('hidden');
+            }
+        });
+
+        // Radio Button Styling
         document.querySelectorAll('input[name="character"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 document.querySelectorAll('#characterOptions label').forEach(l => {
@@ -167,33 +213,52 @@
             });
         });
 
-        let currentImageUrl = '';
+        let voiceTextToSpeech = '';
 
         document.getElementById('adForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             document.getElementById('loadingView').classList.remove('hidden');
             document.getElementById('resultView').classList.add('hidden');
-            document.getElementById('aiImage').classList.add('hidden');
-            document.getElementById('imageLoader').classList.remove('hidden');
 
             const brand = document.getElementById('brandName').value;
             const offer = document.getElementById('offerDetails').value;
             const tone = document.getElementById('adTone').value;
-            const foodQuery = document.getElementById('foodCategory').value;
+            const mode = document.getElementById('imageMode').value;
             const character = document.querySelector('input[name="character"]:checked').value;
 
-            // Update Mockup Text
             document.getElementById('mockupBrand').innerText = brand;
             document.getElementById('mockupOffer').innerText = offer;
+            document.getElementById('voiceBadge').innerText = `صوت ${character}`;
 
-            try {
-                let intro = "مش محتار شو تتغدى اليوم؟";
-                if(tone.includes("فكاهي")) intro = "جوعان ومحتار؟ اسمع مني وحلّها هسّا!";
-                if(tone.includes("فاخر")) intro = "تجربة طعام فريدة بانتظارك اليوم..";
+            // Handle Image Display
+            const previewImg = document.getElementById('adImagePreview');
+            if (mode === 'upload') {
+                const fileInput = document.getElementById('foodImageInput');
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    previewImg.src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop';
+                }
+            } else {
+                const foodQuery = document.getElementById('foodCategory').value;
+                const imagePrompt = encodeURIComponent(`professional studio food photography of ${foodQuery}, appetizing commercial photo, 8k resolution`);
+                previewImg.src = `https://image.pollinations.ai/prompt/${imagePrompt}?width=720&height=1280&nologo=true&seed=${Math.floor(Math.random() * 99999)}`;
+            }
 
-                const generatedScript = `🎬 [المشهد 1 - افتتاحية بأسلوب ${tone}]:
-تظهر شخصية (${character}) وهو ينظر للكاميرا بحماس:
+            // Generate Script and Voiceover Text
+            let intro = "مش محتار شو تتغدى اليوم؟";
+            if(tone.includes("فكاهي")) intro = "جوعان ومحتار؟ اسمع مني وحلّها هسّا!";
+            if(tone.includes("فاخر")) intro = "تجربة طعام فريدة بانتظارك اليوم..";
+
+            voiceTextToSpeech = `${intro} مطعم ${brand} عامل أحلى مفاجأة! ${offer}. اطلب الآن واستمتع بالعرض قبل ما يخلص!`;
+
+            const generatedScript = `🎬 [المشهد 1 - افتتاحية بأسلوب ${tone}]:
+تظهر شخصية (${character}) بنظرة حماسية:
 "${intro} ${brand} عامل أحلى مفاجأة!"
 
 🎬 [المشهد 2 - استعراض الوجبة والعرض]:
@@ -202,62 +267,50 @@
 
 🎬 [المشهد 3 - الدعوة لاتخاذ إجراء Call to Action]:
 يرفع (${character}) يديه بابتسامة:
-"اطلب طلبك هسّا واستمتع بالعرض قبل ما يخلص!"`;
+"اطلب الآن واستمتع بالعرض قبل ما يخلص!"`;
 
-                const generatedCaption = `🔥 عرض حصري من ${brand}!\n\n✨ ${offer}\n\n📍 اطلبها الآن واستمتع بالطعم الأفضل! 🍕🥤\n\n#${brand.replace(/\s+/g, '_')} #مطاعم #SanadAI`;
+            const generatedCaption = `🔥 عرض حصري من ${brand}!\n\n✨ ${offer}\n\n📍 اطلبها الآن واستمتع بالطعم الأفضل! 🍕🥤\n\n#${brand.replace(/\s+/g, '_')} #مطاعم #SanadAI`;
 
-                document.getElementById('scriptOutput').innerText = generatedScript;
-                document.getElementById('captionOutput').innerText = generatedCaption;
+            document.getElementById('scriptOutput').innerText = generatedScript;
+            document.getElementById('captionOutput').innerText = generatedCaption;
 
-                // Dedicated Clean Food Photography Prompt (Without complex arabic text)
-                const imagePrompt = encodeURIComponent(`professional studio food photography of ${foodQuery}, delicious appetizing commercial photo, highly detailed, mouth watering, sharp focus, 8k resolution, restaurant table background`);
-                
-                currentImageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=720&height=1280&nologo=true&seed=${Math.floor(Math.random() * 99999)}`;
-
-                const imgElement = document.getElementById('aiImage');
-                imgElement.src = currentImageUrl;
-                imgElement.onload = () => {
-                    document.getElementById('imageLoader').classList.add('hidden');
-                    imgElement.classList.remove('hidden');
-                };
-
+            setTimeout(() => {
                 document.getElementById('loadingView').classList.add('hidden');
                 document.getElementById('resultView').classList.remove('hidden');
+            }, 800);
+        });
 
-            } catch (err) {
-                alert('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.');
-                document.getElementById('loadingView').classList.add('hidden');
+        // Speech Synthesis (Voiceover)
+        const playVoiceBtn = document.getElementById('playVoiceBtn');
+        const stopVoiceBtn = document.getElementById('stopVoiceBtn');
+
+        playVoiceBtn.addEventListener('click', () => {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Reset previous
+                const utterance = new SpeechSynthesisUtterance(voiceTextToSpeech);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 1.0;
+                utterance.pitch = 1.1;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('التعليق الصوتي غير مدعوم في متصفحك الحالي.');
             }
         });
 
-        // Download Image Function
-        document.getElementById('downloadImgBtn').addEventListener('click', async () => {
-            if(!currentImageUrl) return;
-            try {
-                const response = await fetch(currentImageUrl);
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `sanad-ai-ad-${Date.now()}.jpg`;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            } catch (e) {
-                window.open(currentImageUrl, '_blank');
+        stopVoiceBtn.addEventListener('click', () => {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
             }
         });
 
         // Copy Functions
         document.getElementById('copyScriptBtn').addEventListener('click', () => {
-            const text = document.getElementById('scriptOutput').innerText;
-            navigator.clipboard.writeText(text);
+            navigator.clipboard.writeText(document.getElementById('scriptOutput').innerText);
             alert('تم نسخ السيناريو بنجاح! 📋');
         });
 
         document.getElementById('copyCaptionBtn').addEventListener('click', () => {
-            const text = document.getElementById('captionOutput').innerText;
-            navigator.clipboard.writeText(text);
+            navigator.clipboard.writeText(document.getElementById('captionOutput').innerText);
             alert('تم نسخ الكابشن بنجاح! 📋');
         });
     </script>
