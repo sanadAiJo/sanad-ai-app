@@ -21,28 +21,41 @@
 
     <main class="max-w-md mx-auto p-4 space-y-6">
         <div class="bg-gradient-to-br from-indigo-900/50 to-slate-800 border border-indigo-500/30 rounded-2xl p-4 text-center">
-            <h2 class="text-lg font-bold text-indigo-200 mb-1">موظف التسويق الذكي جاهز</h2>
-            <p class="text-xs text-slate-400">صمم حملتك الإعلانية الكاملة للمطعم خلال ثوانٍ.</p>
+            <h2 class="text-lg font-bold text-indigo-200 mb-1">صانع حملات المطاعم الذكي</h2>
+            <p class="text-xs text-slate-400">ولّد إعلانات وصور دقيقة لعروض مطعمك بضغطة زر.</p>
         </div>
 
         <form id="adForm" class="space-y-4">
             <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">اسم النشاط التجاري / المطعم</label>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">اسم المطعم / النشاط</label>
                 <input type="text" id="brandName" required placeholder="مثال: مطعم الوجبة المميزة" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
             </div>
 
-            <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">تفاصيل العرض أو الوجبة</label>
-                <textarea id="offerDetails" rows="3" required placeholder="مثال: عرض البيتزا الصغير مع مشروب بس بـ 5 دنانير" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">نوع الوجبة الرئيسية</label>
+                    <select id="foodCategory" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                        <option value="pizza">🍕 بيتزا (Pizza)</option>
+                        <option value="burger">🍔 برغر (Burger)</option>
+                        <option value="shawarma">🌯 شاورما / كباب</option>
+                        <option value="fried chicken">🍗 دجاج مقلي / بروستد</option>
+                        <option value="coffee and dessert">☕ قهوة وحلويات</option>
+                        <option value="meal">🍽️ وجبة عامة / متنوعة</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">نبرة الإعلان</label>
+                    <select id="adTone" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                        <option value="حماسي ومباشر">🔥 حماسي (عروض)</option>
+                        <option value="فكاهي ومرح">😂 مرح وفكاهي</option>
+                        <option value="فاخر واحترافي">✨ فاخر وراقٍ</option>
+                    </select>
+                </div>
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">نبرة الإعلان (Tone of Voice)</label>
-                <select id="adTone" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
-                    <option value="حماسي ومباشر">🔥 حماسي ومباشر (أفضل للعروض السريعة)</option>
-                    <option value="فكاهي وقريب من القلب">😂 مرح وفكاهي (أفضل للتيك توك)</option>
-                    <option value="فاخر واحترافي">✨ فاخر واحترافي (أفضل للمطاعم الراقية)</option>
-                </select>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">تفاصيل العرض السريعة</label>
+                <textarea id="offerDetails" rows="2" required placeholder="مثال: بيتزا صغيرة مع مشروب بس بـ 5 دنانير" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
             </div>
 
             <div>
@@ -52,19 +65,19 @@
                         <input type="radio" name="character" value="سند" checked class="hidden">
                         <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">👨‍💼</div>
                         <span class="text-xs font-bold block">سند</span>
-                        <span class="text-[10px] text-slate-400 block">شبابي/أنيق</span>
+                        <span class="text-[10px] text-slate-400 block">شاب عصري</span>
                     </label>
                     <label class="cursor-pointer border border-slate-700 bg-slate-800 rounded-xl p-2 text-center transition flex flex-col items-center">
                         <input type="radio" name="character" value="ليان" class="hidden">
                         <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">👩‍💼</div>
                         <span class="text-xs font-bold block">ليان</span>
-                        <span class="text-[10px] text-slate-400 block">حيوية/عصرية</span>
+                        <span class="text-[10px] text-slate-400 block">حيوية وبشوشة</span>
                     </label>
                     <label class="cursor-pointer border border-slate-700 bg-slate-800 rounded-xl p-2 text-center transition flex flex-col items-center">
                         <input type="radio" name="character" value="تيكو" class="hidden">
                         <div class="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">🤖</div>
                         <span class="text-xs font-bold block">تيكو</span>
-                        <span class="text-[10px] text-slate-400 block">3D/مرح</span>
+                        <span class="text-[10px] text-slate-400 block">شخصية 3D</span>
                     </label>
                 </div>
             </div>
@@ -77,23 +90,40 @@
 
         <div id="loadingView" class="hidden text-center py-8 space-y-3">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
-            <p class="text-sm font-semibold text-indigo-300">جاري إعداد التصميم والسيناريو الإعلاني...</p>
+            <p class="text-sm font-semibold text-indigo-300">جاري رسم الوجبة وتجهيز السيناريو بذكاء...</p>
         </div>
 
-        <div id="resultView" class="hidden space-y-4">
-            <!-- Image Result -->
+        <div id="resultView" class="hidden space-y-5">
+            <!-- Simulated Instagram Story / Reel Mockup -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
-                        <span>🖼️</span> التصميم الإعلاني
+                        <span>📱</span> معاينة ستوري / إعلان إنستغرام
                     </h3>
                     <button id="downloadImgBtn" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg transition font-semibold flex items-center gap-1">
-                        📥 تحميل الصورة
+                        📥 تحميل التصميم
                     </button>
                 </div>
-                <div class="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800 aspect-square flex items-center justify-center">
-                    <img id="aiImage" src="" alt="AI Visual" class="w-full h-full object-cover hidden">
-                    <span id="imageLoader" class="text-xs text-slate-500 animate-pulse">جاري رسم الصورة...</span>
+                
+                <!-- Mockup Frame -->
+                <div class="relative rounded-2xl overflow-hidden bg-slate-950 border-2 border-slate-700 aspect-[9/16] max-w-[280px] mx-auto shadow-2xl flex flex-col justify-between p-3">
+                    <div id="imageLoader" class="absolute inset-0 flex items-center justify-center text-xs text-slate-400 animate-pulse bg-slate-900">جاري رسم الصورة الواقعية...</div>
+                    <img id="aiImage" src="" alt="AI Visual" class="absolute inset-0 w-full h-full object-cover hidden">
+                    
+                    <!-- Overlay Story Elements -->
+                    <div class="relative z-10 flex justify-between items-center bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10">
+                        <span class="text-[11px] font-bold text-white flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-green-500 inline-block animate-ping"></span>
+                            <span id="mockupBrand">مطعم الوجبة</span>
+                        </span>
+                        <span class="text-[9px] bg-indigo-600 text-white px-2 py-0.5 rounded-full font-bold">برعاية Sanad AI</span>
+                    </div>
+
+                    <div class="relative z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 -mx-3 -mb-3 rounded-b-2xl space-y-1 text-right">
+                        <span id="mockupBadge" class="inline-block bg-amber-500 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-md">عرض خاص 🏷️</span>
+                        <p id="mockupOffer" class="text-xs font-bold text-white leading-tight">بيتزا مع مشروب بـ 5 دنانير</p>
+                        <p class="text-[9px] text-slate-300">اطلب الآن من الفرع أو التوصيل 🛵</p>
+                    </div>
                 </div>
             </div>
 
@@ -101,7 +131,7 @@
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
-                        <span>🎬</span> سيناريو الإعلان (Reels / TikTok)
+                        <span>🎬</span> سيناريو الفيديو (Reels / TikTok)
                     </h3>
                     <button id="copyScriptBtn" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg transition font-semibold">
                         📋 نسخ السيناريو
@@ -114,10 +144,10 @@
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
-                        <span>📝</span> المنشور والكابشن
+                        <span>📝</span> كابشن المنشور والهاشتاغات
                     </h3>
                     <button id="copyCaptionBtn" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg transition font-semibold">
-                        📋 نسخ المنشور
+                        📋 نسخ الكابشن
                     </button>
                 </div>
                 <div id="captionOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
@@ -150,7 +180,12 @@
             const brand = document.getElementById('brandName').value;
             const offer = document.getElementById('offerDetails').value;
             const tone = document.getElementById('adTone').value;
+            const category = document.getElementById('foodCategory').value;
             const character = document.querySelector('input[name="character"]:checked').value;
+
+            // Update Mockup Text
+            document.getElementById('mockupBrand').innerText = brand;
+            document.getElementById('mockupOffer').innerText = offer;
 
             try {
                 let intro = "مش محتار شو تتغدى اليوم؟";
@@ -174,9 +209,14 @@
                 document.getElementById('scriptOutput').innerText = generatedScript;
                 document.getElementById('captionOutput').innerText = generatedCaption;
 
-                // AI Image Generation via Pollinations
-                const imagePrompt = encodeURIComponent(`delicious food photography, ${brand}, ${offer}, studio light, commercial ad photography, 8k resolution, highly detailed`);
-                currentImageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=800&height=800&nologo=true&seed=${Math.floor(Math.random() * 9999)}`;
+                // High Accuracy English Prompt Mapping for AI Images
+                let englishChar = "a friendly handsome young Arab man named Sanad holding a delicious meal";
+                if(character === "ليان") englishChar = "a beautiful friendly young Arab woman named Layan holding a delicious meal";
+                if(character === "تيكو") englishChar = "a cute 3D Pixar style mascot character holding a delicious meal";
+
+                const imagePrompt = encodeURIComponent(`high quality commercial food photography of fresh delicious ${category} with a drink, presented by ${englishChar}, background inside a modern restaurant, 8k resolution, cinematic lighting, food advertising photo, masterpiece`);
+                
+                currentImageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=720&height=1280&nologo=true&seed=${Math.floor(Math.random() * 99999)}`;
 
                 const imgElement = document.getElementById('aiImage');
                 imgElement.src = currentImageUrl;
