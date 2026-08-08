@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanad AI - صانع الإعلانات الذكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen pb-12">
+    <!-- Header -->
+    <header class="border-b border-slate-800 p-4 sticky top-0 bg-slate-900/90 backdrop-blur z-50">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Sanad AI 🚀</h1>
+            <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30">نسخة التجربة MVP</span>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-4 space-y-6">
+        <!-- Banner Intro -->
+        <div class="bg-gradient-to-br from-indigo-900/50 to-slate-800 border border-indigo-500/30 rounded-2xl p-4 text-center">
+            <h2 class="text-lg font-bold text-indigo-200 mb-1">موظف التسويق الذكي بانتظارك</h2>
+            <p class="text-xs text-slate-400">أدخل معلومات العرض، اختر سفير علامتك التجارية، واترك الباقي لسند.</p>
+        </div>
+
+        <!-- Form Section -->
+        <form id="adForm" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">اسم النشاط التجاري / المنتج</label>
+                <input type="text" id="brandName" required placeholder="مثال: مطعم شاورما البركة" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">تفاصيل العرض أو الإعلان</label>
+                <textarea id="offerDetails" rows="3" required placeholder="مثال: عرض الوجبة العائلية 3 وجبات شاورما + بطاطا عائلية + لتر بيبسي بـ 5 دنانير فقط" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
+            </div>
+
+            <!-- AI Ambassadors Selector -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-2">اختر سفير الإعلان (AI Ambassador)</label>
+                <div class="grid grid-cols-3 gap-2" id="characterOptions">
+                    <label class="cursor-pointer border-2 border-indigo-500 bg-indigo-950/40 rounded-xl p-2 text-center transition flex flex-col items-center">
+                        <input type="radio" name="character" value="سند - شاب أنيق وحيوي" checked class="hidden">
+                        <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">👨‍💼</div>
+                        <span class="text-xs font-bold block">سند</span>
+                        <span class="text-[10px] text-slate-400 block">شبابي/أنيق</span>
+                    </label>
+                    <label class="cursor-pointer border border-slate-700 bg-slate-800 rounded-xl p-2 text-center transition flex flex-col items-center">
+                        <input type="radio" name="character" value="ليان - فتاة حيوية ومبتسمة" class="hidden">
+                        <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">👩‍💼</div>
+                        <span class="text-xs font-bold block">ليان</span>
+                        <span class="text-[10px] text-slate-400 block">حيوية/عصرية</span>
+                    </label>
+                    <label class="cursor-pointer border border-slate-700 bg-slate-800 rounded-xl p-2 text-center transition flex flex-col items-center">
+                        <input type="radio" name="character" value="شخصية 3D كرتونية مرحة" class="hidden">
+                        <div class="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">🤖</div>
+                        <span class="text-xs font-bold block">تيكو</span>
+                        <span class="text-[10px] text-slate-400 block">3D/مرح</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 flex justify-center items-center gap-2">
+                <span>توليد الحملة الإعلانية الكاملة</span>
+                <span>✨</span>
+            </button>
+        </form>
+
+        <!-- Loading View -->
+        <div id="loadingView" class="hidden text-center py-8 space-y-3">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
+            <p class="text-sm font-semibold text-indigo-300">جاري كتابة السيناريو وتصميم المشاهد بواسطة الذكاء الاصطناعي...</p>
+        </div>
+
+        <!-- Result Section -->
+        <div id="resultView" class="hidden space-y-4">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+                <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
+                    <span>🎬</span> سيناريو الإعلان (Reels / TikTok)
+                </h3>
+                <div id="scriptOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+                <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
+                    <span>📝</span> المنشور والكابشن
+                </h3>
+                <div id="captionOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simple Radio selection toggle styling
+        document.querySelectorAll('input[name="character"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                document.querySelectorAll('#characterOptions label').forEach(l => {
+                    l.classList.remove('border-indigo-500', 'bg-indigo-950/40');
+                    l.classList.add('border-slate-700', 'bg-slate-800');
+                });
+                e.target.closest('label').classList.remove('border-slate-700', 'bg-slate-800');
+                e.target.closest('label').classList.add('border-indigo-500', 'bg-indigo-950/40');
+            });
+        });
+
+        document.getElementById('adForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.getElementById('loadingView').classList.remove('hidden');
+            document.getElementById('resultView').classList.add('hidden');
+
+            const brand = document.getElementById('brandName').value;
+            const offer = document.getElementById('offerDetails').value;
+            const character = document.querySelector('input[name="character"]:checked').value;
+
+            // Temporary mock logic for UI testing
+            setTimeout(() => {
+                document.getElementById('loadingView').classList.add('hidden');
+                document.getElementById('resultView').classList.remove('hidden');
+
+                document.getElementById('scriptOutput').innerText = 
+                    `[المشهد 1]: تظهر شخصية (${character}) وهي تبتسم للمشاهدين وتقول:\n"مش عارف شو تتغدا اليوم؟ عروض ${brand} وصلت!"\n\n[المشهد 2]: عرض سريع وشهي للمنتج (${offer}).\n\n[المشهد 3]: العودة للشخصية:\n"اطلب الآن ولا تفوت العرض!"`;
+
+                document.getElementById('captionOutput').innerText = 
+                    `🔥 العرض الأقوى من ${brand}!\n\n${offer}\n\n📍 اطلب الآن واستمتع بالطعم.\n\n#إعلان #${brand.replace(/\s+/g, '_')} #عروض #وجبات`;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
+
