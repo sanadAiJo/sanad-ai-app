@@ -15,14 +15,14 @@
     <header class="border-b border-slate-800 p-4 sticky top-0 bg-slate-900/90 backdrop-blur z-50">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Sanad AI 🚀</h1>
-            <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30">توليد تلقائي مجاني</span>
+            <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30">الإصدار المتقدم Pro</span>
         </div>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
         <div class="bg-gradient-to-br from-indigo-900/50 to-slate-800 border border-indigo-500/30 rounded-2xl p-4 text-center">
             <h2 class="text-lg font-bold text-indigo-200 mb-1">موظف التسويق الذكي جاهز</h2>
-            <p class="text-xs text-slate-400">أدخل معلومات العرض واضغط توليد مباشرة.</p>
+            <p class="text-xs text-slate-400">صمم حملتك الإعلانية الكاملة للمطعم خلال ثوانٍ.</p>
         </div>
 
         <form id="adForm" class="space-y-4">
@@ -34,6 +34,15 @@
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1">تفاصيل العرض أو الوجبة</label>
                 <textarea id="offerDetails" rows="3" required placeholder="مثال: عرض البيتزا الصغير مع مشروب بس بـ 5 دنانير" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">نبرة الإعلان (Tone of Voice)</label>
+                <select id="adTone" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                    <option value="حماسي ومباشر">🔥 حماسي ومباشر (أفضل للعروض السريعة)</option>
+                    <option value="فكاهي وقريب من القلب">😂 مرح وفكاهي (أفضل للتيك توك)</option>
+                    <option value="فاخر واحترافي">✨ فاخر واحترافي (أفضل للمطاعم الراقية)</option>
+                </select>
             </div>
 
             <div>
@@ -61,38 +70,56 @@
             </div>
 
             <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 flex justify-center items-center gap-2">
-                <span>توليد الحملة بالذكاء الاصطناعي</span>
+                <span>توليد الحملة المكتملة</span>
                 <span>✨</span>
             </button>
         </form>
 
         <div id="loadingView" class="hidden text-center py-8 space-y-3">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
-            <p class="text-sm font-semibold text-indigo-300">جاري كتابة السيناريو وتصميم الصورة بواسطة AI...</p>
+            <p class="text-sm font-semibold text-indigo-300">جاري إعداد التصميم والسيناريو الإعلاني...</p>
         </div>
 
         <div id="resultView" class="hidden space-y-4">
+            <!-- Image Result -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
-                <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
-                    <span>🖼️</span> صورة السفير مع العرض
-                </h3>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
+                        <span>🖼️</span> التصميم الإعلاني
+                    </h3>
+                    <button id="downloadImgBtn" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg transition font-semibold flex items-center gap-1">
+                        📥 تحميل الصورة
+                    </button>
+                </div>
                 <div class="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800 aspect-square flex items-center justify-center">
                     <img id="aiImage" src="" alt="AI Visual" class="w-full h-full object-cover hidden">
-                    <span id="imageLoader" class="text-xs text-slate-500 animate-pulse">جاري رسم المشهد...</span>
+                    <span id="imageLoader" class="text-xs text-slate-500 animate-pulse">جاري رسم الصورة...</span>
                 </div>
             </div>
 
+            <!-- Script Result -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
-                <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
-                    <span>🎬</span> سيناريو الإعلان (Reels / TikTok)
-                </h3>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
+                        <span>🎬</span> سيناريو الإعلان (Reels / TikTok)
+                    </h3>
+                    <button id="copyScriptBtn" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg transition font-semibold">
+                        📋 نسخ السيناريو
+                    </button>
+                </div>
                 <div id="scriptOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
             </div>
 
+            <!-- Caption Result -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
-                <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
-                    <span>📝</span> المنشور والكابشن
-                </h3>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-1.5">
+                        <span>📝</span> المنشور والكابشن
+                    </h3>
+                    <button id="copyCaptionBtn" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg transition font-semibold">
+                        📋 نسخ المنشور
+                    </button>
+                </div>
                 <div id="captionOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
             </div>
         </div>
@@ -110,6 +137,8 @@
             });
         });
 
+        let currentImageUrl = '';
+
         document.getElementById('adForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -120,33 +149,37 @@
 
             const brand = document.getElementById('brandName').value;
             const offer = document.getElementById('offerDetails').value;
+            const tone = document.getElementById('adTone').value;
             const character = document.querySelector('input[name="character"]:checked').value;
 
             try {
-                // Smart Dynamic Script Generation Engine
-                const generatedScript = `🎬 [المشهد 1 - افتتاحية مشوقة]:
-تظهر شخصية (${character}) مبتسماً وهو يحمل الوجبة الجذابة، وينظر للكاميرا بحماس:
-"مش محتار شو تتغدى اليوم؟ ${brand} جابلك الحل الصح!"
+                let intro = "مش محتار شو تتغدى اليوم؟";
+                if(tone.includes("فكاهي")) intro = "جوعان ومحتار؟ اسمع مني وحلّها هسّا!";
+                if(tone.includes("فاخر")) intro = "تجربة طعام فريدة بانتظارك اليوم..";
 
-🎬 [المشهد 2 - استعراض العرض]:
-زاوية مقربة على الوجبة:
-"${offer} .. طعم رائع وسعر بفرّح القلب!"
+                const generatedScript = `🎬 [المشهد 1 - افتتاحية بأسلوب ${tone}]:
+تظهر شخصية (${character}) وهو يمسك بالوجبة بنظرة حماسية:
+"${intro} ${brand} عامل أحلى مفاجأة!"
+
+🎬 [المشهد 2 - استعراض الوجبة والعرض]:
+زاوية مقربة جداً على الوجبة الشهية:
+"${offer} .. طعم خطير وسعر ما بيتفوت!"
 
 🎬 [المشهد 3 - الدعوة لاتخاذ إجراء Call to Action]:
-يرفع (${character}) المشروب وينصح المشاهدين:
-"اطلبها الآن وجربها بنفسك قبل ما يفوتك العرض!"`;
+يرفع (${character}) المشروب بابتسامة:
+"اطرح طلبك هسّا واستمتع بالعرض قبل ما يخلص!"`;
 
-                const generatedCaption = `🔥 عرض حصري ومميز من ${brand}!\n\n✨ ${offer}\n\n📍 لا تتردد بالطلب الآن واستمتع بأقوى طعم وأفضل سعر! 🍕🥤\n\n#${brand.replace(/\s+/g, '_')} #مطاعم #عروض_اليوم #SanadAI`;
+                const generatedCaption = `🔥 عرض حصري من ${brand}!\n\n✨ ${offer}\n\n📍 اطلبها الآن واستمتع بالطعم الأفضل! 🍕🥤\n\n#${brand.replace(/\s+/g, '_')} #مطاعم #SanadAI`;
 
                 document.getElementById('scriptOutput').innerText = generatedScript;
                 document.getElementById('captionOutput').innerText = generatedCaption;
 
-                // AI Image Generation via Pollinations (Food Photography)
-                const imagePrompt = encodeURIComponent(`delicious food photography, ${brand}, ${offer}, commercial advertisement photo, studio light, mouth watering, 8k resolution`);
-                const imageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=800&height=800&nologo=true&seed=${Math.floor(Math.random() * 9999)}`;
+                // AI Image Generation via Pollinations
+                const imagePrompt = encodeURIComponent(`delicious food photography, ${brand}, ${offer}, studio light, commercial ad photography, 8k resolution, highly detailed`);
+                currentImageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=800&height=800&nologo=true&seed=${Math.floor(Math.random() * 9999)}`;
 
                 const imgElement = document.getElementById('aiImage');
-                imgElement.src = imageUrl;
+                imgElement.src = currentImageUrl;
                 imgElement.onload = () => {
                     document.getElementById('imageLoader').classList.add('hidden');
                     imgElement.classList.remove('hidden');
@@ -159,6 +192,37 @@
                 alert('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.');
                 document.getElementById('loadingView').classList.add('hidden');
             }
+        });
+
+        // Download Image Function
+        document.getElementById('downloadImgBtn').addEventListener('click', async () => {
+            if(!currentImageUrl) return;
+            try {
+                const response = await fetch(currentImageUrl);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `sanad-ai-ad-${Date.now()}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } catch (e) {
+                window.open(currentImageUrl, '_blank');
+            }
+        });
+
+        // Copy Functions
+        document.getElementById('copyScriptBtn').addEventListener('click', () => {
+            const text = document.getElementById('scriptOutput').innerText;
+            navigator.clipboard.writeText(text);
+            alert('تم نسخ السيناريو بنجاح! 📋');
+        });
+
+        document.getElementById('copyCaptionBtn').addEventListener('click', () => {
+            const text = document.getElementById('captionOutput').innerText;
+            navigator.clipboard.writeText(text);
+            alert('تم نسخ الكابشن بنجاح! 📋');
         });
     </script>
 </body>
