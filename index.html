@@ -20,42 +20,45 @@
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
-        <!-- Banner Intro -->
         <div class="bg-gradient-to-br from-indigo-900/50 to-slate-800 border border-indigo-500/30 rounded-2xl p-4 text-center">
             <h2 class="text-lg font-bold text-indigo-200 mb-1">موظف التسويق الذكي بانتظارك</h2>
             <p class="text-xs text-slate-400">أدخل معلومات العرض، اختر سفير علامتك التجارية، واترك الباقي لسند.</p>
         </div>
 
-        <!-- Form Section -->
+        <!-- Key Input Option if ENV is not set -->
+        <div id="apiKeyContainer" class="bg-slate-800/80 border border-amber-500/30 p-3 rounded-xl text-xs space-y-2">
+            <label class="block text-amber-300 font-semibold">مفتاح Gemini API (إن لم تفعل متغيّرات البيئة):</label>
+            <input type="password" id="manualApiKey" placeholder="الصق المفتاح هنا للتجربة الفورية" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white focus:outline-none focus:border-amber-500 text-xs">
+        </div>
+
         <form id="adForm" class="space-y-4">
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1">اسم النشاط التجاري / المنتج</label>
-                <input type="text" id="brandName" required placeholder="مثال: مطعم شاورما البركة" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                <input type="text" id="brandName" required placeholder="مثال: مطعم الوجبة المميزة" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white">
             </div>
 
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1">تفاصيل العرض أو الإعلان</label>
-                <textarea id="offerDetails" rows="3" required placeholder="مثال: عرض الوجبة العائلية 3 وجبات شاورما + بطاطا عائلية + لتر بيبسي بـ 5 دنانير فقط" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
+                <textarea id="offerDetails" rows="3" required placeholder="مثال: عرض البيتزا المارجريتا بس بـ 3 دنانير مع مشروب" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
             </div>
 
-            <!-- AI Ambassadors Selector -->
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-2">اختر سفير الإعلان (AI Ambassador)</label>
                 <div class="grid grid-cols-3 gap-2" id="characterOptions">
                     <label class="cursor-pointer border-2 border-indigo-500 bg-indigo-950/40 rounded-xl p-2 text-center transition flex flex-col items-center">
-                        <input type="radio" name="character" value="سند (شاب أردني عالي الأناقة بملابس كاجوال عصرية)" checked class="hidden">
+                        <input type="radio" name="character" value="سند (شاب أنيق بملابس كاجوال عصرية)" checked class="hidden">
                         <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">👨‍💼</div>
                         <span class="text-xs font-bold block">سند</span>
                         <span class="text-[10px] text-slate-400 block">شبابي/أنيق</span>
                     </label>
                     <label class="cursor-pointer border border-slate-700 bg-slate-800 rounded-xl p-2 text-center transition flex flex-col items-center">
-                        <input type="radio" name="character" value="ليان (فتاة عربية حيوية وبشوشة بملابس عصرية)" class="hidden">
+                        <input type="radio" name="character" value="ليان (فتاة عربية حيوية وبشوشة)" class="hidden">
                         <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">👩‍💼</div>
                         <span class="text-xs font-bold block">ليان</span>
                         <span class="text-[10px] text-slate-400 block">حيوية/عصرية</span>
                     </label>
                     <label class="cursor-pointer border border-slate-700 bg-slate-800 rounded-xl p-2 text-center transition flex flex-col items-center">
-                        <input type="radio" name="character" value="تيكو (شخصية كرتونية 3D لطيفة ومبتكرة)" class="hidden">
+                        <input type="radio" name="character" value="تيكو (شخصية كرتونية 3D لطيفة)" class="hidden">
                         <div class="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center font-bold text-lg mb-1">🤖</div>
                         <span class="text-xs font-bold block">تيكو</span>
                         <span class="text-[10px] text-slate-400 block">3D/مرح</span>
@@ -69,26 +72,22 @@
             </button>
         </form>
 
-        <!-- Loading View -->
         <div id="loadingView" class="hidden text-center py-8 space-y-3">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
-            <p class="text-sm font-semibold text-indigo-300">جاري كتابة السيناريو وتصميم صورة الإعلان بواسطة AI...</p>
+            <p class="text-sm font-semibold text-indigo-300">جاري كتابة السيناريو وتصميم الصورة بواسطة AI...</p>
         </div>
 
-        <!-- Result Section -->
         <div id="resultView" class="hidden space-y-4">
-            <!-- Generated Image Card -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
-                    <span>🖼️</span> صورة السفير مع المنتج (AI Visual)
+                    <span>🖼️</span> صورة السفير مع المنتج
                 </h3>
                 <div class="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800 aspect-square flex items-center justify-center">
-                    <img id="aiImage" src="" alt="AI Generated Visual" class="w-full h-full object-cover hidden">
+                    <img id="aiImage" src="" alt="AI Visual" class="w-full h-full object-cover hidden">
                     <span id="imageLoader" class="text-xs text-slate-500 animate-pulse">جاري رسم المشهد...</span>
                 </div>
             </div>
 
-            <!-- Generated Script Card -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
                     <span>🎬</span> سيناريو الإعلان (Reels / TikTok)
@@ -96,7 +95,6 @@
                 <div id="scriptOutput" class="text-xs text-slate-300 leading-relaxed whitespace-pre-line bg-slate-900/60 p-3 rounded-xl border border-slate-800"></div>
             </div>
 
-            <!-- Generated Caption Card -->
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
                 <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
                     <span>📝</span> المنشور والكابشن
@@ -107,8 +105,6 @@
     </main>
 
     <script>
-        const GEMINI_API_KEY = "AQ.Ab8RN6IHu8SUcRqgRX5xU4cr-cqO1XDlvqKtKj0wDF7kO_iToA"; // <--- ضع مفتاحك هنا
-
         document.querySelectorAll('input[name="character"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 document.querySelectorAll('#characterOptions label').forEach(l => {
@@ -122,6 +118,15 @@
 
         document.getElementById('adForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            const manualKey = document.getElementById('manualApiKey').value.trim();
+            const apiKey = manualKey;
+
+            if (!apiKey) {
+                alert('يرجى وضع API Key في الحقل المخصص أعلى الصفحة لتشغيل الذكاء الاصطناعي.');
+                return;
+            }
+
             document.getElementById('loadingView').classList.remove('hidden');
             document.getElementById('resultView').classList.add('hidden');
             document.getElementById('aiImage').classList.add('hidden');
@@ -132,7 +137,6 @@
             const character = document.querySelector('input[name="character"]:checked').value;
 
             try {
-                // 1. Call Gemini API for Script & Caption
                 const prompt = `أنت خبير تسويق إعلاني. قم بكتابة حملة إعلانية قصيرة بأسلوب جذّاب وبلهمة عربية محببة لمشروع (${brand}) وعرضه (${offer}). 
 الشخصية التي ستظهر هي (${character}).
 
@@ -143,7 +147,7 @@
 ---الكابشن---
 [اكتب منشور انستغرام/تيك توك جذّاب مع إيموجيز وهاشتاغات مناسبة]`;
 
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -152,8 +156,12 @@
                 });
 
                 const data = await response.json();
-                const textResult = data.candidates[0].content.parts[0].text;
+                
+                if (data.error) {
+                    throw new Error(data.error.message || 'خطأ في المفتاح');
+                }
 
+                const textResult = data.candidates[0].content.parts[0].text;
                 const parts = textResult.split('---الكابشن---');
                 const scriptText = parts[0] ? parts[0].replace('---السيناريو---', '').trim() : textResult;
                 const captionText = parts[1] ? parts[1].trim() : '';
@@ -161,8 +169,8 @@
                 document.getElementById('scriptOutput').innerText = scriptText;
                 document.getElementById('captionOutput').innerText = captionText;
 
-                // 2. Generate AI Image using Pollinations AI
-                const imagePrompt = encodeURIComponent(`A high quality professional photo of ${character} holding or presenting ${brand} ${offer}, realistic lighting, highly detailed, marketing advertisement photo`);
+                // Generate AI Image using Pollinations AI
+                const imagePrompt = encodeURIComponent(`A high quality professional photo of ${character} presenting ${brand} ${offer}, commercial advertisement photo, 8k resolution, realistic lighting`);
                 const imageUrl = `https://image.pollinations.ai/prompt/${imagePrompt}?width=800&height=800&nologo=true&seed=${Math.floor(Math.random() * 1000)}`;
 
                 const imgElement = document.getElementById('aiImage');
@@ -176,7 +184,7 @@
                 document.getElementById('resultView').classList.remove('hidden');
 
             } catch (err) {
-                alert('حدث خطأ أثناء الاتصال بالذكاء الاصطناعي. تأكد من صحة API Key.');
+                alert('حدث خطأ: ' + err.message);
                 document.getElementById('loadingView').classList.add('hidden');
             }
         });
